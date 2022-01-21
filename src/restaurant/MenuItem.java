@@ -1,26 +1,23 @@
 package restaurant;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.Date;
 
 public class MenuItem {
-
-    // Add ArrayList of categories to prevent faulty user input
-    // ArrayList<String> categories = new ArrayList<>();
 
     private String itemName;
     private String category;
     private String description;
     private double price;
-    private LocalDate date;
+    private Date dateAdded;
+    private boolean isNew;
 
 
-    public MenuItem(String itemName, String category, String description, double price, LocalDate date) {
+    public MenuItem(String itemName, String category, String description, double price, Date date) {
         this.itemName = itemName;
         this.category = category;
         this.description = description;
         this.price = price;
-        this.date = date;
+        this.dateAdded = date;
     }
 
     public String getItemName() {
@@ -55,12 +52,12 @@ public class MenuItem {
         this.price = price;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public Date getDate() {
+        return dateAdded;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setDate(Date date) {
+        this.dateAdded = date;
     }
 }
 

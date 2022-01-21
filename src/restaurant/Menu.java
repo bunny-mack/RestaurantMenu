@@ -1,40 +1,76 @@
 package restaurant;
 
-//It should be possible to display whether a menu item is new or not
-//The app should know when the menu was last updated, so visitors can see the restaurant changing/adding items
-
 import java.util.ArrayList;
-import java.time.LocalDate;
+import java.util.Date;
 
 public class Menu {
-    public static void main(String[] args) {
+    private Date lastUpdated;
+    private ArrayList<MenuItem> items;
 
-        ArrayList<MenuItem> fullMenu = new ArrayList();
+    public Menu(Date lastUpdated, ArrayList<MenuItem> items) {
+        this.lastUpdated = lastUpdated;
+        this.items = items;
+    }
 
-        MenuItem burger = new MenuItem("burger", "Main", "burger", 9.99, LocalDate.of(2021, 10, 10));
-        MenuItem salad = new MenuItem("salad", "Appetizer", "salad", 5.99, LocalDate.of(2022, 1, 10));
-        MenuItem chicken = new MenuItem("chicken", "Main", "chicken", 9.99, LocalDate.of(2021, 12, 10));
-        MenuItem cake = new MenuItem("cake", "Dessert", "cake", 4.99, LocalDate.of(2021, 11, 10));
+    public Date getLastUpdated() {
+        return lastUpdated;
+    }
 
-        //create auto-add feature
-        fullMenu.add(burger);
-        fullMenu.add(salad);
-        fullMenu.add(chicken);
-        fullMenu.add(cake);
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
 
-        System.out.println("\nMenu Options: \n");
+    public ArrayList<MenuItem> getItems() {
+        return items;
+    }
 
-        for (MenuItem i : fullMenu) {
-            //if (i.getDate().compareTo(ChronoLocalDate()))
-            System.out.println("Item: "+i.getItemName());
-            System.out.println("Category: "+i.getCategory());
-            System.out.println("Description: "+i.getDescription());
-            System.out.println("Price: $"+i.getPrice());
-            System.out.println("Date added: "+i.getDate());
-            System.out.println("\n");
+    public void setItems(ArrayList<MenuItem> items) {
+        this.items = items;
+    }
+
+    //ADD ITEM TO MENU
+    public ArrayList<MenuItem> addItem(MenuItem item) {
+        this.items.add(item);
+        return this.items;
+    }
+
+    //REMOVE ITEM FROM MENU
+    public ArrayList<MenuItem> removeItem(MenuItem item) {
+        int toBeRemoved = -1;
+        for(int i = 0; i < items.size(); i++) {
+            if (items.get(i).equals(item)) {
+                toBeRemoved = i;
+            }
         }
+        this.items.remove(toBeRemoved);
+        return this.items;
+    }
+
+    public String menuUpdated() {
+        return ("The menu was ;ast ipdated on" + this.lastUpdated);
+    }
+
+    public void printItem(MenuItem item) {
+        System.out.println(item.getItemName() + ": " + item.getDescription() + ", " + item.getPrice());
+    }
+
+    public void printMenu() {
+        for (int i = 0; i < items.size(); i++) {
+            System.out.println(items.get(i).getItemName() + ": " + items.get(i).getDescription() + ", " + items.get(i).getPrice());
+        }
+    }
+
+        //CHECK IF MENU ITEMS ARE EQUAL
+
+//        @Override
+//        public boolean equals(Object o) {
+//            if (this == o) return true;
+//            if (o == null || getClass() != o.getClass()) return false;
+//            MenuItem item = (MenuItem) o;
+//            return itemName == item.itemName && category == item.category && Double.compare(item.price, price) == 0 && itemName.equals(item.itemName);
+//        }
+
 
     }
-}
 
 
